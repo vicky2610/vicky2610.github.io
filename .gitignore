@@ -1,0 +1,11 @@
+.shots/
+__pycache__/
+.DS_Store
+
+# 部署辅助文件，不进线上仓库
+deploy.py
+deploy_gitlab.py
+.gitlab-ci.yml
+
+# 工作区配置与记忆，不公开
+.workbuddy/
