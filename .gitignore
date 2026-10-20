@@ -13,3 +13,6 @@ deploy_gitlab.py
 # 原始素材与未压缩截图，不公开
 作品集材料/
 assets/img/_raw/
+
+# 批注截图等临时目录
+修改意见/
