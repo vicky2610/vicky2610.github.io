@@ -9,3 +9,7 @@ deploy_gitlab.py
 
 # 工作区配置与记忆，不公开
 .workbuddy/
+
+# 原始素材与未压缩截图，不公开
+作品集材料/
+assets/img/_raw/
