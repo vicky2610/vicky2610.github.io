@@ -38,7 +38,7 @@ python -m http.server 8000
 
 | 要改什么 | 位置 | 怎么改 |
 |---|---|---|
-| 微信二维码 | `content.js` → `contact.wechatQr` | 图片放到 `assets/img/wechat.png`，值改成 `"assets/img/wechat.png"` |
+| 微信二维码 | `content.js` → `contact.wechatQr` | 当前为 `assets/img/wechat-qr.jpg`；换图时覆盖同名文件即可，或改名后同步改这个字段 |
 | 首屏截图 | `content.js` → `hero.shot` | 换成新截图时同步改 `w` / `h`，否则会变形 |
 | 工具截图 | `content.js` → `tools[0].shots` | 同上；删除某张就从数组里去掉，布局自动适应 |
 | 补充案例 | `content.js` → `cases` | 按 `kind:"project"` 的结构加一条；`kind:"hits"` 是爆款双子卡专用 |

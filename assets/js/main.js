@@ -358,7 +358,7 @@
   function renderContact() {
     var c = D.contact;
     var qr = c.wechatQr
-      ? '<div class="qr-box"><img src="' + esc(c.wechatQr) + '" alt="微信二维码" /></div>'
+      ? '<div class="qr-box qr-box--img"><img src="' + esc(c.wechatQr) + '" alt="微信二维码" /></div>'
       : '<div class="qr-box">' + esc(c.wechatFallback) + "</div>";
 
     setHTML(

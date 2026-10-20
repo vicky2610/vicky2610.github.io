@@ -262,7 +262,7 @@ window.SITE_DATA = {
     title: "现在可以聊聊",
     desc: "看简历不如直接聊项目。把你的品类、预算和目标发我，我可以先给一版媒介思路。",
     email: "kikisorang@163.com",
-    wechatQr: "",
+    wechatQr: "assets/img/wechat-qr.jpg",
     wechatFallback: "二维码待补充",
     wechatNote: "加微信请备注「作品集」",
     status: "可立即到岗",
