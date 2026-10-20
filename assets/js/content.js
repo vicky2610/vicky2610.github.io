@@ -22,20 +22,19 @@ window.SITE_DATA = {
   },
 
   nav: [
-    { label: "项目", href: "#cases" },
+    { label: "亮点项目", href: "#cases" },
     { label: "AI 工具", href: "#tools" },
-    { label: "关于", href: "#about" },
-    { label: "联系", href: "#contact" }
+    { label: "关于", href: "#about" }
   ],
 
   hero: {
     eyebrow: "MEDIA BUYER · 3 YEARS · SHENZHEN",
     title: { pre: "一个", accent: "懂技术", post: "的品牌媒介" },
     sub:
-      "3 年乙方全案，抖音 / 小红书。300 万预算投出 2.1 亿曝光；顺手把每天搬数据的活，写成了两个工具。",
+      "3 年乙方全案，抖音 / 小红书。计算机教育背景，以结果为导向，用理工科思维复盘，使用AI工具提高工作效能。",
     ctas: [
       { label: "看项目", href: "#cases", primary: true },
-      { label: "聊机会", href: "#contact", primary: false }
+      { label: "看工具", href: "#tools", primary: false }
     ],
     numbers: [
       { v: "2.1 亿", k: "单项目全域曝光", n: "超额 367% 完成 KPI" },
@@ -43,7 +42,7 @@ window.SITE_DATA = {
       { v: "24.6w", k: "单条内容最高赞", n: "广东本地场景大爆款" }
     ],
     facts: [
-      { k: "背景", v: "通信工程本科" },
+      { k: "背景", v: "计算机本科" },
       { k: "平台", v: "抖音 / 小红书" },
       { k: "经验", v: "3 年乙方全案" }
     ],
@@ -51,9 +50,9 @@ window.SITE_DATA = {
       src: "assets/img/wb-overview.webp",
       w: 1600,
       h: 1311,
-      alt: "自建媒介工作台总览页",
-      cap: "自己写的媒介工作台 · 总览",
-      meta: "4 个项目 / 47 条合作 / 11 条预警规则"
+      alt: "媒介工作台总览（演示数据）",
+      cap: "用AI写的媒介工作台·总览",
+      meta: "作为演示，图中均为虚假数据"
     }
   },
 
