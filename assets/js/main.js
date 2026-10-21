@@ -1,6 +1,6 @@
 /* =========================================================
  * 渲染与交互 —— 内容全部来自 content.js 的 window.SITE_DATA
- * 结构：Hero / 项目 / AI 工具 / 关于 / 联系
+ * 结构：Hero / 亮点项目 / AI 工具 / 联系
  * ========================================================= */
 (function () {
   "use strict";
@@ -10,7 +10,7 @@
 
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  /* ---------------- 图标（只保留实际用到的） ---------------- */
+  /* ---------------- 图标 ---------------- */
   var ICONS = {
     mail:
       '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5.5" width="18" height="13" rx="2.5"/><path d="m4 8 8 5.4L20 8"/></svg>',
@@ -41,15 +41,17 @@
 
   /* ---------------- 导航 ---------------- */
   function renderNav() {
-    var links = D.nav.map(function (n) {
-      return '<a href="' + esc(n.href) + '">' + esc(n.label) + "</a>";
-    }).join("");
-    setHTML("navLinks", links);
+    setHTML(
+      "navLinks",
+      D.nav.map(function (n) {
+        return '<a href="' + esc(n.href) + '">' + esc(n.label) + "</a>";
+      }).join("")
+    );
     setHTML(
       "mobileMenu",
       D.nav.map(function (n) {
         return '<a href="' + esc(n.href) + '">' + esc(n.label) + "</a>";
-      }).join("") + '<a href="#contact" style="color:var(--accent-deep);font-weight:600">聊聊机会 →</a>'
+      }).join("") + '<a href="#contact" style="color:var(--accent-deep);font-weight:600">聊机会 →</a>'
     );
     var mark = document.getElementById("brandMark");
     if (mark) mark.textContent = D.site.initials;
@@ -114,7 +116,7 @@
     );
   }
 
-  /* ---------------- 项目（普通案例 + 爆款双子卡） ---------------- */
+  /* ---------------- 项目 ---------------- */
   function renderProjectCard(c, i) {
     var cover = c.cover || {};
     var results = c.results.map(function (r) {
@@ -135,7 +137,7 @@
         '<div class="case-cover" style="--h:' + (i * 47) % 360 + ";--c1:" + cover.c1 + ";--c2:" + cover.c2 + '"' +
           ' data-pattern="' + (cover.pattern || "grid") + '">' +
           '<span class="case-cover-label">' + esc(cover.label || "") + "</span>" +
-          '<span class="case-cover-brand">' + esc(c.meta[0]) + "</span>" +
+          '<span class="case-cover-brand">' + esc(cover.brand || "") + "</span>" +
           '<span class="case-glyph" aria-hidden="true">' + esc(cover.glyph || "") + "</span>" +
         "</div>" +
         '<div class="case-body">' +
@@ -171,7 +173,7 @@
     return (
       '<article class="case case--hits reveal">' +
         '<div class="case-body">' +
-          '<div class="case-meta"><span>' + esc(c.no) + '</span><span>内容爆款</span><span>抖音</span></div>' +
+          '<div class="case-meta"><span>' + esc(c.no) + "</span><span>抖音</span></div>" +
           "<h3>" + esc(c.title) + "</h3>" +
           '<p class="case-subline">' + esc(c.sub) + "</p>" +
           '<div class="hits">' + items + "</div>" +
@@ -206,44 +208,6 @@
     );
   }
 
-  function renderSpark(t) {
-    var vals = t.values || [];
-    if (vals.length < 2) return "";
-    var w = 340, hgt = 96, pad = 8;
-    var min = Math.min.apply(null, vals), max = Math.max.apply(null, vals);
-    var span = max - min || 1;
-    var pts = vals.map(function (v, i) {
-      var x = pad + (i * (w - pad * 2)) / (vals.length - 1);
-      var y = hgt - pad - ((v - min) / span) * (hgt - pad * 2);
-      return [x, y];
-    });
-    var line = pts.map(function (p) { return p[0].toFixed(1) + "," + p[1].toFixed(1); }).join(" ");
-    var area = "M" + pts[0][0].toFixed(1) + "," + (hgt - pad) +
-      " L" + pts.map(function (p) { return p[0].toFixed(1) + "," + p[1].toFixed(1); }).join(" L ") +
-      " L" + pts[pts.length - 1][0].toFixed(1) + "," + (hgt - pad) + " Z";
-
-    var dots = pts.map(function (p) {
-      return '<circle cx="' + p[0].toFixed(1) + '" cy="' + p[1].toFixed(1) + '" r="3.4" />';
-    }).join("");
-
-    var labels = (t.labels || []).map(function (l, i) {
-      var x = pad + (i * (w - pad * 2)) / ((t.labels.length - 1) || 1);
-      return '<text x="' + x.toFixed(1) + '" y="' + (hgt + 14) + '" text-anchor="middle">' + esc(l) + "</text>";
-    }).join("");
-
-    return (
-      '<figure class="spark reveal">' +
-        '<svg viewBox="0 0 ' + w + " " + (hgt + 22) + '" role="img" aria-label="4 天点赞趋势">' +
-          '<path class="spark-area" d="' + area + '"></path>' +
-          '<polyline class="spark-line" points="' + line + '"></polyline>' +
-          '<g class="spark-dots">' + dots + "</g>" +
-          '<g class="spark-labels">' + labels + "</g>" +
-        "</svg>" +
-        '<figcaption class="spark-cap">' + esc(t.caption) + "</figcaption>" +
-      "</figure>"
-    );
-  }
-
   function renderTable(t) {
     var head = t.head.map(function (h, i) {
       return "<th" + (i === 5 ? ' class="col-new"' : "") + ">" + esc(h) + "</th>";
@@ -266,55 +230,39 @@
     );
   }
 
-  function renderLogs(logs) {
-    var rows = logs.map(function (l) {
-      return (
-        '<div class="log-row log-row--' + esc(l.state || "ok") + '">' +
-          '<span class="log-t">' + esc(l.t) + "</span>" +
-          '<span class="log-msg">' + esc(l.msg) + "</span>" +
-        "</div>"
-      );
-    }).join("");
-    return '<div class="log reveal"><div class="log-head">RUN LOG · 2026-09-23</div>' + rows + "</div>";
+  function renderFeatures(list) {
+    if (!list || !list.length) return "";
+    return (
+      '<div class="tool-feats reveal" style="--n:' + Math.min(list.length, 4) + '">' +
+      list.map(function (f) {
+        return '<div class="tool-feat"><b>' + esc(f.t) + "</b><span>" + esc(f.d) + "</span></div>";
+      }).join("") +
+      "</div>"
+    );
   }
 
   function renderTool(t, idx) {
-    var stats = t.stats.map(function (s) {
-      return '<div class="tool-stat"><b>' + esc(s.v) + "</b><span>" + esc(s.k) + "</span></div>";
-    }).join("");
-
     var points = t.points.map(function (p) { return "<li>" + esc(p) + "</li>"; }).join("");
     var shots = (t.shots || []).map(renderShot).join("");
-
-    var extra = "";
-    if (t.table) {
-      extra +=
-        '<div class="tool-grid">' +
-          '<div class="tool-col">' + renderTable(t.table) + "</div>" +
-          '<div class="tool-col">' + (t.logs ? renderLogs(t.logs) : "") + (t.trend ? renderSpark(t.trend) : "") + "</div>" +
-        "</div>";
-    }
-    if (t.reuse) {
-      extra +=
-        '<div class="reuse reveal"><span class="reuse-k">同一套逻辑，换张表就能用</span>' +
-        '<ul class="chips">' + t.reuse.map(function (r) { return "<li>" + esc(r) + "</li>"; }).join("") + "</ul></div>";
-    }
+    var judge = t.judgement
+      ? '<div class="judgement"><span class="judgement-k">' + esc(t.judgement.label) + "</span><p>" +
+        esc(t.judgement.text) + "</p></div>"
+      : "";
 
     return (
       '<article class="tool reveal" id="tool-' + esc(t.id) + '">' +
         '<div class="tool-head">' +
           "<div>" +
-            '<div class="tool-kicker">TOOL 0' + (idx + 1) + " · 自己做的</div>" +
+            '<div class="tool-kicker">TOOL 0' + (idx + 1) + "</div>" +
             "<h3>" + esc(t.name) + "</h3>" +
             '<p class="tool-lead">' + esc(t.lead) + "</p>" +
           "</div>" +
-          '<div class="tool-stats" style="--cols:' + Math.min(t.stats.length, 4) + '">' + stats + "</div>" +
         "</div>" +
+        renderFeatures(t.features) +
         '<ul class="tool-points">' + points + "</ul>" +
-        '<div class="judgement"><span class="judgement-k">' + esc(t.judgement.label) + "</span>" +
-          "<p>" + esc(t.judgement.text) + "</p></div>" +
+        judge +
         (shots ? '<div class="tool-shots">' + shots + "</div>" : "") +
-        extra +
+        (t.table ? renderTable(t.table) : "") +
         (t.limit ? '<p class="tool-limit">' + esc(t.limit) + "</p>" : "") +
       "</article>"
     );
@@ -323,35 +271,6 @@
   function renderTools() {
     var html = D.tools.map(renderTool).join("");
     setHTML("toolsMount", secHead(D.toolsTitle) + '<div class="tools">' + html + "</div>");
-  }
-
-  /* ---------------- 关于 ---------------- */
-  function renderAbout() {
-    var a = D.about;
-    var tl = a.timeline.map(function (t) {
-      return (
-        "<li>" +
-          '<div class="tl-period">' + esc(t.period) + "</div>" +
-          '<div class="tl-org">' + esc(t.org) + "</div>" +
-          '<div class="tl-role">' + esc(t.role) + "</div>" +
-        "</li>"
-      );
-    }).join("");
-    var cats = a.categories.map(function (c) { return "<li>" + esc(c) + "</li>"; }).join("");
-    var how = a.how.map(function (h) { return "<li>" + esc(h) + "</li>"; }).join("");
-
-    setHTML(
-      "aboutMount",
-      secHead(D.aboutTitle) +
-        '<div class="about-grid">' +
-          '<div class="about-copy reveal"><p class="about-lead">' + esc(a.lead) + "</p>" +
-            '<ul class="timeline">' + tl + "</ul></div>" +
-          '<div class="about-side">' +
-            '<div class="side-line reveal"><span class="side-k">服务品类</span><ul class="chips">' + cats + "</ul></div>" +
-            '<div class="side-line reveal"><span class="side-k">工作方式</span><ul class="how">' + how + "</ul></div>" +
-          "</div>" +
-        "</div>"
-    );
   }
 
   /* ---------------- 联系 ---------------- */
@@ -366,8 +285,8 @@
       '<div class="contact-card reveal">' +
         "<div>" +
           '<p class="contact-label">CONTACT</p>' +
-          "<h2>" + esc(c.title) + "</h2>" +
-          '<p class="lead">' + esc(c.desc) + "</p>" +
+          (c.title ? "<h2>" + esc(c.title) + "</h2>" : "") +
+          (c.desc ? '<p class="lead">' + esc(c.desc) + "</p>" : "") +
           '<div class="mail-row">' +
             '<a class="mail-btn" href="mailto:' + esc(c.email) + '">' + ICONS.mail + esc(c.email) + "</a>" +
             '<button class="copy-btn" type="button" id="copyMail" data-mail="' + esc(c.email) + '">复制邮箱</button>' +
@@ -379,7 +298,7 @@
         "</div>" +
         '<div class="qr-card">' + qr +
           '<div class="qr-title">微信</div>' +
-          '<div class="qr-note">' + esc(c.wechatNote) + "</div>" +
+          (c.wechatNote ? '<div class="qr-note">' + esc(c.wechatNote) + "</div>" : "") +
         "</div>" +
       "</div>"
     );
@@ -422,7 +341,7 @@
     }
 
     var links = Array.prototype.slice.call(document.querySelectorAll(".nav-links a, .mobile-menu a"));
-    var sections = ["cases", "tools", "about", "contact"].map(function (id) {
+    var sections = ["cases", "tools", "contact"].map(function (id) {
       return document.getElementById(id);
     }).filter(Boolean);
 
@@ -537,7 +456,6 @@
   renderHero();
   renderCases();
   renderTools();
-  renderAbout();
   renderContact();
   renderFooter();
 
@@ -546,8 +464,4 @@
   initShots();
   initLightbox();
   initCopy();
-
-  // 预览辅助：?scroll=1200 可直接定位，便于截图自查
-  var sm = location.search.match(/[?&]scroll=(\d+)/);
-  if (sm) window.scrollTo({ top: parseInt(sm[1], 10), behavior: "instant" });
 })();
