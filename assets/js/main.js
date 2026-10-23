@@ -156,8 +156,13 @@
 
   function renderHitsCard(c) {
     var items = c.items.map(function (it) {
+      var thumb = it.shot
+        ? '<figure class="hit-shot"><img class="zoomable" src="' + esc(it.shot.src) + '" width="' + it.shot.w +
+          '" height="' + it.shot.h + '" alt="' + esc(it.shot.alt) + '" loading="lazy" decoding="async" /></figure>'
+        : "";
       return (
         '<div class="hit">' +
+          thumb +
           '<div class="hit-left">' +
             '<div class="hit-num">' + esc(it.likes) + '<em>赞</em></div>' +
             '<div class="hit-tag">' + esc(it.category) + " · " + esc(it.platform) + "</div>" +
@@ -181,6 +186,24 @@
         "</div>" +
       "</article>"
     );
+  }
+
+  function renderSelfMedia() {
+    var html = D.selfmedia.map(function (s, i) {
+      return (
+        '<article class="self-card reveal" style="transition-delay:' + i * 0.05 + 's">' +
+          '<figure class="self-shot"><img class="zoomable" src="' + esc(s.shot.src) + '" width="' + s.shot.w +
+            '" height="' + s.shot.h + '" alt="' + esc(s.shot.alt) + '" loading="lazy" decoding="async" /></figure>' +
+          '<div class="self-body">' +
+            '<div class="self-platform"><span>' + esc(s.platform) + '</span><em>' + esc(s.tag) + "</em></div>" +
+            '<h3 class="self-title">' + esc(s.title) + "</h3>" +
+            '<div class="self-likes">' + esc(s.likes) + "<em>赞</em></div>" +
+            '<div class="self-meta">' + esc(s.meta) + "</div>" +
+          "</div>" +
+        "</article>"
+      );
+    }).join("");
+    setHTML("selfMount", secHead(D.selfTitle) + '<div class="self-grid">' + html + "</div>");
   }
 
   function renderCases() {
@@ -341,7 +364,7 @@
     }
 
     var links = Array.prototype.slice.call(document.querySelectorAll(".nav-links a, .mobile-menu a"));
-    var sections = ["cases", "tools", "contact"].map(function (id) {
+    var sections = ["cases", "selfmedia", "tools", "contact"].map(function (id) {
       return document.getElementById(id);
     }).filter(Boolean);
 
@@ -377,7 +400,7 @@
   }
 
   function initShots() {
-    Array.prototype.forEach.call(document.querySelectorAll(".shot-frame img"), function (img) {
+    Array.prototype.forEach.call(document.querySelectorAll(".shot-frame img, .zoomable"), function (img) {
       img.addEventListener("error", function () {
         var frame = img.parentNode;
         frame.classList.add("is-empty");
@@ -399,7 +422,7 @@
     }
 
     document.addEventListener("click", function (e) {
-      var img = e.target.closest ? e.target.closest(".shot-frame img") : null;
+      var img = e.target.closest ? e.target.closest(".shot-frame img, .zoomable") : null;
       if (!img || overlay) return;
       var fig = img.closest(".shot");
       var capEl = fig ? fig.querySelector(".shot-cap") : null;
@@ -455,6 +478,7 @@
   renderNav();
   renderHero();
   renderCases();
+  renderSelfMedia();
   renderTools();
   renderContact();
   renderFooter();

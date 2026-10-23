@@ -22,6 +22,7 @@ window.SITE_DATA = {
 
   nav: [
     { label: "亮点项目", href: "#cases" },
+    { label: "自媒体", href: "#selfmedia" },
     { label: "AI 工具", href: "#tools" }
   ],
 
@@ -129,22 +130,77 @@ window.SITE_DATA = {
           category: "滋补品",
           platform: "抖音",
           angle: "从失眠这个痛点场景切入，用科普达人讲清原理，再自然带出产品",
-          why: "专业账号做背书，失眠人群基数大——话题天然有人听"
+          why: "专业账号做背书，失眠人群基数大——话题天然有人听",
+          shot: {
+            src: "assets/img/hit-1.webp",
+            w: 560,
+            h: 998,
+            alt: "失眠科普内容截图，11.4 万赞"
+          }
         },
         {
           likes: "24.6w",
           category: "药酒",
           platform: "抖音",
           angle: "合作粤文化搞笑账号，从广东人的共鸣场景讲产品的含金量",
-          why: "先扒达人往期爆款，复用已被验证的表达结构，而不是从零想创意"
+          why: "先扒达人往期爆款，复用已被验证的表达结构，而不是从零想创意",
+          shot: {
+            src: "assets/img/hit-2.webp",
+            w: 560,
+            h: 996,
+            alt: "广东人共鸣内容截图，24.6 万赞"
+          }
         }
       ],
       takeaway: "两条的共性：先定人群的最大公约数，再找能把它说透的账号。"
     }
   ],
 
-  toolsTitle: {
+  selfTitle: {
     index: "02",
+    eyebrow: "SELF-MEDIA",
+    title: "Gap 期间，自己的号也在跑",
+    desc:
+      "离职这段时间没停手：自己开抖音和小红书，选题、脚本、拍摄、剪辑、发布全流程自己做。4 条内容合计 3.7 万赞，抖音两条合计 214 万播放。"
+  },
+
+  selfmedia: [
+    {
+      platform: "抖音",
+      tag: "数码",
+      title: "18 这个功能也太好用了吧",
+      likes: "3.2w",
+      meta: "179.8w 播放 · 1,133 评论",
+      shot: { src: "assets/img/self-2.webp", w: 480, h: 956, alt: "抖音数码内容截图，3.2 万赞" }
+    },
+    {
+      platform: "抖音",
+      tag: "探店",
+      title: "沉浸式体验深圳湾 800+ 的板前料理",
+      likes: "1,326",
+      meta: "34.4w 播放 · 559 收藏",
+      shot: { src: "assets/img/self-1.webp", w: 480, h: 956, alt: "抖音探店 vlog 截图，1,326 赞" }
+    },
+    {
+      platform: "小红书",
+      tag: "便利店",
+      title: "薄巧脑袋在便利店看到这个",
+      likes: "3,020",
+      meta: "19.4w 浏览 · 758 收藏",
+      shot: { src: "assets/img/self-3.webp", w: 480, h: 956, alt: "小红书便利店笔记截图，3,020 赞" }
+    },
+    {
+      platform: "小红书",
+      tag: "城市打卡",
+      title: "免费的！深圳新地标 莫奈花园",
+      likes: "669",
+      meta: "352 收藏 · 81 评论",
+      shot: { src: "assets/img/self-4.webp", w: 480, h: 956, alt: "小红书城市打卡笔记截图，669 赞" }
+    }
+  ],
+
+  toolsTitle: {
+    index: "03",
     eyebrow: "AI × MEDIA",
     title: "用 AI 做的提效工具",
     desc:
