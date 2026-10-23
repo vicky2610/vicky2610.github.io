@@ -364,7 +364,7 @@
     }
 
     var links = Array.prototype.slice.call(document.querySelectorAll(".nav-links a, .mobile-menu a"));
-    var sections = ["cases", "selfmedia", "tools", "contact"].map(function (id) {
+    var sections = ["cases", "tools", "selfmedia", "contact"].map(function (id) {
       return document.getElementById(id);
     }).filter(Boolean);
 
@@ -478,8 +478,8 @@
   renderNav();
   renderHero();
   renderCases();
-  renderSelfMedia();
   renderTools();
+  renderSelfMedia();
   renderContact();
   renderFooter();
 

@@ -22,8 +22,8 @@ window.SITE_DATA = {
 
   nav: [
     { label: "亮点项目", href: "#cases" },
-    { label: "自媒体", href: "#selfmedia" },
-    { label: "AI 工具", href: "#tools" }
+    { label: "AI 工具", href: "#tools" },
+    { label: "自媒体", href: "#selfmedia" }
   ],
 
   hero: {
@@ -122,7 +122,7 @@ window.SITE_DATA = {
     {
       kind: "hits",
       no: "03",
-      title: "两条爆款内容，36 万赞",
+      title: "爆款内容",
       sub: "不是运气，是同一套「人群 × 账号」判断。",
       items: [
         {
@@ -157,21 +157,21 @@ window.SITE_DATA = {
   ],
 
   selfTitle: {
-    index: "02",
+    index: "03",
     eyebrow: "SELF-MEDIA",
-    title: "Gap 期间，自己的号也在跑",
+    title: "尝试自媒体",
     desc:
-      "离职这段时间没停手：自己开抖音和小红书，选题、脚本、拍摄、剪辑、发布全流程自己做。4 条内容合计 3.7 万赞，抖音两条合计 214 万播放。"
+      "离职这段时间没停手：自己开抖音和小红书，选题、脚本、拍摄、剪辑、发布全流程自己做。下面是近期 4 条爆款内容。"
   },
 
   selfmedia: [
     {
       platform: "抖音",
-      tag: "数码",
+      tag: "拍照",
       title: "18 这个功能也太好用了吧",
       likes: "3.2w",
       meta: "179.8w 播放 · 1,133 评论",
-      shot: { src: "assets/img/self-2.webp", w: 480, h: 956, alt: "抖音数码内容截图，3.2 万赞" }
+      shot: { src: "assets/img/self-2.webp", w: 480, h: 956, alt: "抖音拍照技巧内容截图，3.2 万赞" }
     },
     {
       platform: "抖音",
@@ -183,24 +183,24 @@ window.SITE_DATA = {
     },
     {
       platform: "小红书",
-      tag: "便利店",
+      tag: "探店",
       title: "薄巧脑袋在便利店看到这个",
       likes: "3,020",
       meta: "19.4w 浏览 · 758 收藏",
-      shot: { src: "assets/img/self-3.webp", w: 480, h: 956, alt: "小红书便利店笔记截图，3,020 赞" }
+      shot: { src: "assets/img/self-3.webp", w: 480, h: 956, alt: "小红书探店笔记截图，3,020 赞" }
     },
     {
       platform: "小红书",
-      tag: "城市打卡",
+      tag: "拍照打卡",
       title: "免费的！深圳新地标 莫奈花园",
       likes: "669",
       meta: "352 收藏 · 81 评论",
-      shot: { src: "assets/img/self-4.webp", w: 480, h: 956, alt: "小红书城市打卡笔记截图，669 赞" }
+      shot: { src: "assets/img/self-4.webp", w: 480, h: 956, alt: "小红书拍照打卡笔记截图，669 赞" }
     }
   ],
 
   toolsTitle: {
-    index: "03",
+    index: "02",
     eyebrow: "AI × MEDIA",
     title: "用 AI 做的提效工具",
     desc:
